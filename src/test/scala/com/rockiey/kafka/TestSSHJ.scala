@@ -35,7 +35,8 @@ object TestSSHJ {
 //        }
 //
         echo(cmd.getInputStream)
-        System.out.println(scala.io.Source.fromInputStream(cmd.getInputStream()).mkString)
+//        System.out.println(scala.io.Source.fromInputStream(cmd.getInputStream()).mkString)
+//        System.out.println(IOUtils.readFully(cmd.getInputStream()).toString())
 //        System.out.println(IOUtils.readFully(cmd.getInputStream()).toString())
         cmd.join(5, TimeUnit.SECONDS)
         System.out.println("\n** exit status: " + cmd.getExitStatus())
@@ -58,26 +59,36 @@ object TestSSHJ {
   class LineEcho(in: InputStream)(implicit val codec: Codec) {
     val separator: String = System.getProperty("line.separator")
 
-    var b = 0
-
-
     var hasMore: Boolean = true
+
 
     def getLine: String = {
 
       var n = in.available()
 
-      val ar = java.nio.ByteBuffer.allocate(n)
+      if (n > 0) {
+        val ar = java.nio.ByteBuffer.allocate(n)
 
-      while (n > 0) {
-        b = in.read()
+        var nextByte = in.read()
 
-        ar.put(b.toByte)
-        n -= 1
-        if (b == -1) hasMore = false
+        while (n > 0 && nextByte != -1) {
+
+            ar.put(nextByte.toByte)
+            n -= 1
+
+          nextByte = in.read()
+        }
+
+        if (nextByte == -1) {
+          hasMore = false
+        }
+
+        val s = new String(ar.array())
+        s
       }
-      val s = new String(ar.array())
-      s
+      else {
+        ""
+      }
     }
   }
 }
