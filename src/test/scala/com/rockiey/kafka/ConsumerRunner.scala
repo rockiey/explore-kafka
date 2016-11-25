@@ -1,4 +1,4 @@
-package com.knockdata.redback.kafka
+package com.rockiey.kafka
 
 import kafka.consumer.KafkaStream
 

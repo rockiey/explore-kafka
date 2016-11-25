@@ -2,7 +2,7 @@ package com.rockiey.kafka
 
 import java.sql.Date
 
-import com.com.knockdata.redback.SparkEnv
+import com.rockiey.spark.SparkEnv
 import org.junit.Test
 import org.apache.spark.sql.functions._
 import org.apache.kafka.common.serialization.StringDeserializer

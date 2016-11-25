@@ -2,8 +2,13 @@ package com.knockdata.redback.kafka
 
 import java.util.{Date, Properties, Random}
 
-import kafka.producer.{KeyedMessage, Producer, ProducerConfig}
+import org.apache.kafka.clients.producer.ProducerConfig
+import org.apache.kafka.clients.producer.KafkaProducer
+import org.apache.kafka.clients.producer.ProducerRecord
+
+import kafka.producer.{KeyedMessage, Producer}
 import org.junit.{After, Before, Test}
+
 
 class TestProducer {
 
@@ -18,13 +23,13 @@ class TestProducer {
   props.put("producer.type", "async")
   //props.put("request.required.acks", "1")
 
-  var producer: Producer[String, String] = null
+  val producer = new KafkaProducer[String, String](props)
 
   @Before
   def before: Unit = {
 
-    val config = new ProducerConfig(props)
-    producer = new Producer[String, String](config)
+//    val config = new ProducerConfig(props)
+//    producer = new KafkaProducer[String, String](config)
   }
 
   @After
@@ -38,7 +43,7 @@ class TestProducer {
       val runtime = new Date().getTime()
       val ip = "192.168.2." + rnd.nextInt(255)
       val msg = runtime + "," + nEvents + ",www.example.com," + ip
-      val data = new KeyedMessage[String, String](topic, ip, msg)
+      val data = new ProducerRecord[String, String](topic, ip, msg)
       producer.send(data)
     }
 

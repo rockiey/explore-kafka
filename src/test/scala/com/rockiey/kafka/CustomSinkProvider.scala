@@ -1,4 +1,4 @@
-package com.knockdata.redback.kafka
+package com.rockiey.kafka
 
 import org.apache.spark.sql._
 import org.apache.spark.sql.execution.streaming.Sink

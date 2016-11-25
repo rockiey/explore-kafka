@@ -3,6 +3,7 @@
 
 .idea
 .DS_Store
+*.iml
 
 # sbt specific
 .cache
