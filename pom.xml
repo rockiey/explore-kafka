@@ -6,8 +6,8 @@
   <inceptionYear>2016</inceptionYear>
   <properties>
 
-    <spark.version>2.0.2</spark.version>
-    <scala.version>2.11.8</scala.version>
+    <spark.version>2.4.4</spark.version>
+    <scala.version>2.11.12</scala.version>
     <scala.binary.version>2.11</scala.binary.version>
 
     <dependency.locations.enabled>false</dependency.locations.enabled>

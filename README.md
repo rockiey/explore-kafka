@@ -13,4 +13,8 @@ Check topics
 
     bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic test
 
-docker run -d -p 2181:2181 -p 9092:9092 -v `pwd`:/data spark-kakfa
+simple start environment
+
+    docker build -t spark-kafka .
+    
+    docker run -d -p 2181:2181 -p 9092:9092 -v `pwd`:/data spark-kakfa
